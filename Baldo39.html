@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentazione Baldovinetti 39</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem;
+        }
+        .presentation-container {
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* More rounded corners */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            max-width: 900px; /* Wider container for presentation feel */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Ensures rounded corners apply to content */
+            min-height: 600px; /* Minimum height for better presentation */
+        }
+        .slide-content {
+            padding: 2.5rem; /* More padding */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .slide-title {
+            font-size: 2.5rem; /* Larger title */
+            font-weight: 700;
+            color: #1f2937; /* Darker text */
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            outline: none; /* Remove default focus outline */
+            border-bottom: 1px dashed transparent; /* Subtle dashed border on hover */
+            transition: border-color 0.2s ease;
+        }
+        .slide-title:hover, .slide-title:focus {
+            border-color: #9ca3af;
+        }
+        .slide-subtitle {
+            font-size: 1.5rem; /* Larger subtitle */
+            font-weight: 600;
+            color: #4b5563; /* Slightly lighter gray */
+            margin-bottom: 1rem;
+            outline: none;
+            border-bottom: 1px dashed transparent;
+            transition: border-color 0.2s ease;
+        }
+        .slide-subtitle:hover, .slide-subtitle:focus {
+            border-color: #9ca3af;
+        }
+        .slide-points li {
+            font-size: 1.125rem; /* Readable text */
+            color: #374151; /* Medium dark text */
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+            outline: none;
+            border-bottom: 1px dashed transparent;
+            transition: border-color 0.2s ease;
+        }
+        .slide-points li:hover, .slide-points li:focus {
+            border-color: #9ca3af;
+        }
+        .slide-points ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        .slide-footer {
+            background-color: #e5e7eb; /* Light gray footer */
+            padding: 1.5rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #d1d5db;
+        }
+        .nav-button {
+            padding: 0.75rem 2rem; /* Larger buttons */
+            border-radius: 0.75rem; /* Rounded buttons */
+            font-weight: 600;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-button:hover {
+            transform: translateY(-2px);
+        }
+        .nav-button:disabled {
+            background-color: #d1d5db;
+            color: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .prev-button {
+            background-color: #f3f4f6;
+            color: #374151;
+            border: 1px solid #9ca3af;
+        }
+        .prev-button:hover:not(:disabled) {
+            background-color: #e5e7eb;
+        }
+        .next-button {
+            background-color: #4f46e5; /* Indigo */
+            color: #ffffff;
+            border: none;
+        }
+        .next-button:hover:not(:disabled) {
+            background-color: #4338ca; /* Darker indigo */
+        }
+        .slide-number {
+            font-size: 1rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        .slide-image-container {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .slide-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        /* Style for contenteditable elements when focused */
+        [contenteditable="true"]:focus {
+            outline: 2px solid #6366f1; /* Ring-like focus */
+            outline-offset: 2px;
+            border-color: transparent; /* Hide dashed border when focused */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .presentation-container {
+                min-height: 60vh; /* Adjust for smaller screens */
+            }
+            .slide-content {
+                padding: 1.5rem;
+            }
+            .slide-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+            .slide-subtitle {
+                font-size: 1.25rem;
+                margin-bottom: 0.75rem;
+            }
+            .slide-points li {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+            .slide-footer {
+                flex-direction: column;
+                padding: 1rem 1.5rem;
+                gap: 1rem;
+            }
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div id="slide-content" class="slide-content">
+            <!-- Slide content will be rendered here by JavaScript -->
+        </div>
+        <div class="slide-footer">
+            <button id="prevBtn" class="nav-button prev-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+                Precedente
+            </button>
+            <span id="slide-number" class="slide-number"></span>
+            <button id="nextBtn" class="nav-button next-button">
+                Successivo
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Data for each slide, including title, subtitle, points, and an image placeholder.
+        // The points array can contain HTML for styling (e.g., <strong> for bold, <ul><li> for nested lists).
+        let slides = [
+            {
+                title: 'Elevare Baldovinetti 39: Intrecciare la Vostra Storia in Connessioni Durature',
+                subtitle: 'Una Proposta Strategica per Contenuti Visivi',
+                points: [],
+                image: { src: 'https://placehold.co/600x300/a78bfa/ffffff?text=Boutique+Elegante', alt: 'Immagine: Interno di boutique elegante o logo stilizzato.' }
+            },
+            {
+                title: 'L\'Opportunità per Baldovinetti 39',
+                subtitle: 'Oltre i Prodotti: Il Potere della Vostra Storia',
+                points: [
+                    '<strong>Fiducia Acquisita:</strong> I vostri profumi "si vendono da soli" – i clienti riconoscono e apprezzano già la qualità di Baldovinetti 39. Questa credibilità esistente è la vostra risorsa più grande.',
+                    '<strong>Eredità Unica:</strong> Un\'attività familiare multi-generazionale offre una narrazione ricca e autentica che vi distingue.',
+                    '<strong>L\'Obiettivo:</strong> Catturare e amplificare questo valore intrinseco, favorendo connessioni più profonde con i clienti esistenti e attirandone di nuovi che apprezzano l\'autenticità e la qualità duratura.'
+                ],
+                image: { src: 'https://placehold.co/600x300/60a5fa/ffffff?text=Legame+Familiare', alt: 'Immagine: Scatto spontaneo di Alessio o richiamo alla storia familiare.' }
+            },
+            {
+                title: 'Il Nostro Approccio Strategico: La Narrazione al Primo Posto',
+                subtitle: 'Contenuti di Impatto Oltre le Immagini Generiche',
+                points: [
+                    '<strong>Il Nostro Focus:</strong> La nostra proposta non riguarda solo gli scatti di prodotto; si tratta di una <strong>narrazione visiva strategica</strong>.',
+                    '<strong>Perché la Narrazione?:</strong>',
+                    '<ul><li><strong>Connessione Emotiva:</strong> Le persone acquistano e rimangono fedeli ai marchi con cui si sentono connesse.</li><li><strong>Differenziazione del Brand:</strong> Una storia avvincente aiuta Baldovinetti 39 a distinguersi nettamente in un mercato affollato.</li><li><strong>Trasferimento di Valore:</strong> Possiamo estendere efficacemente la fiducia che i clienti ripongono nei vostri profumi a tutta la vostra offerta di moda, sia per uomo che per donna.</li></ul>'
+                ],
+                image: { src: 'https://placehold.co/600x300/34d399/ffffff?text=Storytelling+Strategico', alt: 'Immagine: Concetto di narrazione visiva con elementi di moda.' }
+            },
+            {
+                title: 'Presentiamo: Il Pacchetto di Storytelling "Eredità Baldovinetti"',
+                subtitle: 'Contenuti Fondamentali per un Impatto Duraturo',
+                points: [
+                    'Questo pacchetto è progettato per creare contenuti video autentici e di alta qualità che approfondiscono il cuore di Baldovinetti 39, mostrando la sua eredità, i suoi valori fondamentali e la sua curatela esperta in tutti i reparti.'
+                ],
+                image: { src: 'https://placehold.co/600x300/fcd34d/1f2937?text=Pacchetto+Eredità', alt: 'Immagine: Grafica moderna che rappresenta contenuti video o icona "play".' }
+            },
+            {
+                title: 'Cosa Include: Il Video Principale "Il Viaggio Baldovinetti"',
+                subtitle: 'La Vostra Narrativa di Brand Principale (2-3 Minuti)',
+                points: [
+                    '<strong>Intervista con il Titolare e Figure Chiave:</strong> Interviste filmate professionalmente che catturano l\'essenza della storia della boutique, la passione della famiglia e la filosofia che guida le loro selezioni. Questo sarà il fulcro della vostra storia di brand.',
+                    '<strong>Sguardi Dietro le Quinte:</strong> Approfondimenti autentici sul vostro meticoloso processo di selezione – dalla valutazione di una nuova collezione di abbigliamento all\'arte di scegliere una nuova linea di fragranze. Questo rivela l\'esperienza che i clienti apprezzano.',
+                    '<strong>Mostrare lo Spazio:</strong> Riprese splendidamente realizzate dell\'ambiente unico della boutique, che ne enfatizzano il carattere, fondendo armoniosamente le aree profumeria e abbigliamento.'
+                ],
+                image: { src: 'https://placehold.co/600x300/a8a29e/ffffff?text=Video+Brand+History', alt: 'Immagine: Interno della boutique o un esperto al lavoro.' }
+            },
+            {
+                title: 'Cosa Include: Contenuti Brevi Curati',
+                subtitle: 'Coinvolgenti e Condivisibili per i Social Media (4-6 Elementi)',
+                points: [
+                    'Derivati direttamente dal video principale, creeremo clip più brevi e incisive, ottimizzate per piattaforme come Instagram Reels, Stories e TikTok.',
+                    '<strong>Esempi di contenuto:</strong> Mini-serie "Incontra i Curatori", "Una Giornata a Baldovinetti 39", frammenti sulla filosofia dietro la selezione di profumi o rapidi "Spotlight di Stile" che mostrano l\'abbigliamento.',
+                    '<strong>Obiettivo:</strong> Questi elementi cattureranno rapidamente l\'attenzione, genereranno traffico verso i vostri profili e manterranno un coinvolgimento costante con il vostro pubblico.'
+                ],
+                image: { src: 'https://placehold.co/600x300/fbbf24/1f2937?text=Social+Media+Content', alt: 'Immagine: Mock-up di post sui social media con video in riproduzione.' }
+            },
+            {
+                title: 'Produzione e Impatto',
+                subtitle: 'Qualità Professionale, Massima Portata',
+                points: [
+                    '<strong>Produzione di Alta Qualità:</strong> Garantiamo un valore di produzione professionale, inclusa illuminazione esperta, audio cristallino e videografia cinematografica che riflette veramente la natura premium di Baldovinetti 39.',
+                    '<strong>Ottimizzazione dei Contenuti:</strong> Forniremo chiare raccomandazioni su come e dove utilizzare al meglio questi contenuti sul vostro sito web, sui canali social media e persino nelle esposizioni in negozio per massimizzare l\'impatto e il coinvolgimento.',
+                    '<strong>Benefici Complessivi:</strong> Questo approccio porta a una connessione più profonda con i clienti, a una maggiore fiducia nel brand su tutte le linee di prodotto e a una forte differenziazione sul mercato.'
+                ],
+                image: { src: 'https://placehold.co/600x300/38bdf8/ffffff?text=Qualità+e+Portata', alt: 'Immagine: Attrezzatura video professionale o icone social media.' }
+            },
+            {
+                title: 'Investimento per un Valore Duraturo',
+                subtitle: 'Costruire Asset di Brand Che Si Apprezzano nel Tempo',
+                points: [
+                    '<strong>Investimento nel Pacchetto di Storytelling "Eredità Baldovinetti":</strong>',
+                    '<ul><li>A partire da €3.500 - €5.500</li></ul>',
+                    'Questo investimento copre la produzione professionale, la direzione creativa e la creazione di asset di brand versatili e di alta qualità.',
+                    '<strong>Opzione di Approccio a Fasi:</strong> Siamo aperti a discutere un\'implementazione a fasi, iniziando con la storia principale dell\'eredità e espandendo in base alle prestazioni e alle vostre esigenze in evoluzione.'
+                ],
+                image: { src: 'https://placehold.co/600x300/818cf8/ffffff?text=Investimento+Intelligente', alt: 'Immagine: Grafico di crescita o simbolo monetario.' }
+            },
+            {
+                title: 'Prossimi Passi',
+                subtitle: 'Diamo Vita alla Vostra Storia!',
+                points: [
+                    'Siamo sinceramente entusiasti dell\'opportunità di collaborare e approfondire la vostra visione per Baldovinetti 39.',
+                    '<strong>Proposto:</strong> Un incontro di follow-up con voi e Alessio per discutere questa proposta più in dettaglio, rispondere a qualsiasi domanda possiate avere e adattare le specifiche per allinearle al meglio agli obiettivi immediati e alla visione a lungo termine di Baldovinetti 39.',
+                    '<strong>Call to Action:</strong> Sareste disponibili per un breve incontro la prossima settimana per esplorare come possiamo svelare la storia di Baldovinetti?'
+                ],
+                image: { src: 'https://placehold.co/600x300/ec4899/ffffff?text=Collaboriamo!', alt: 'Immagine: Persone che collaborano o si stringono la mano.' }
+            }
+        ];
+
+        let currentSlideIndex = 0;
+        const slideContentDiv = document.getElementById('slide-content');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideNumberSpan = document.getElementById('slide-number');
+
+        /**
+         * Saves the edited content of a slide element back to the slides array.
+         * @param {HTMLElement} element - The editable HTML element (h2, h3, or li).
+         * @param {string} type - The type of content ('title', 'subtitle', or 'point').
+         * @param {number} [pointIndex] - The index of the point if type is 'point'.
+         */
+        function saveContent(element, type, pointIndex) {
+            if (type === 'title') {
+                slides[currentSlideIndex].title = element.textContent;
+            } else if (type === 'subtitle') {
+                slides[currentSlideIndex].subtitle = element.textContent;
+            } else if (type === 'point' && pointIndex !== undefined) {
+                // Save innerHTML to preserve any user-entered HTML tags (like <b>)
+                slides[currentSlideIndex].points[pointIndex] = element.innerHTML;
+            }
+        }
+
+        /**
+         * Renders the content of the current slide into the DOM.
+         */
+        function displaySlide() {
+            const slide = slides[currentSlideIndex];
+            slideContentDiv.innerHTML = ''; // Clear previous content
+
+            // Add image if available
+            if (slide.image && slide.image.src) {
+                const imageContainer = document.createElement('div');
+                imageContainer.className = 'slide-image-container';
+                const imageElement = document.createElement('img');
+                imageElement.src = slide.image.src;
+                imageElement.alt = slide.image.alt;
+                imageElement.className = 'slide-image';
+                imageContainer.appendChild(imageElement);
+                slideContentDiv.appendChild(imageContainer);
+            }
+
+            // Create and append title
+            const titleElement = document.createElement('h2');
+            titleElement.className = 'slide-title';
+            titleElement.textContent = slide.title;
+            titleElement.setAttribute('contenteditable', 'true');
+            titleElement.addEventListener('blur', () => saveContent(titleElement, 'title'));
+            slideContentDiv.appendChild(titleElement);
+
+            // Create and append subtitle if it exists
+            if (slide.subtitle !== undefined) { // Check for undefined to allow empty string as valid subtitle
+                const subtitleElement = document.createElement('h3');
+                subtitleElement.className = 'slide-subtitle';
+                subtitleElement.textContent = slide.subtitle;
+                subtitleElement.setAttribute('contenteditable', 'true');
+                subtitleElement.addEventListener('blur', () => saveContent(subtitleElement, 'subtitle'));
+                slideContentDiv.appendChild(subtitleElement);
+            }
+
+            // Create and append points if they exist
+            if (slide.points && slide.points.length > 0) {
+                const pointsList = document.createElement('ul');
+                pointsList.className = 'slide-points';
+                slide.points.forEach((point, index) => {
+                    const listItem = document.createElement('li');
+                    // Using innerHTML to allow for bold tags and nested lists within points
+                    listItem.innerHTML = point;
+                    listItem.setAttribute('contenteditable', 'true');
+                    listItem.addEventListener('blur', () => saveContent(listItem, 'point', index));
+                    pointsList.appendChild(listItem);
+                });
+                slideContentDiv.appendChild(pointsList);
+            }
+
+            updateNavigationButtons();
+            updateSlideNumber();
+        }
+
+        /**
+         * Updates the enabled/disabled state of navigation buttons.
+         */
+        function updateNavigationButtons() {
+            prevBtn.disabled = currentSlideIndex === 0;
+            nextBtn.disabled = currentSlideIndex === slides.length - 1;
+        }
+
+        /**
+         * Updates the current slide number displayed.
+         */
+        function updateSlideNumber() {
+            slideNumberSpan.textContent = `Slide ${currentSlideIndex + 1} di ${slides.length}`;
+        }
+
+        /**
+         * Navigates to the next slide.
+         */
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                displaySlide();
+            }
+        }
+
+        /**
+         * Navigates to the previous slide.
+         */
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                displaySlide();
+            }
+        }
+
+        // Event listeners for navigation buttons
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Initialize the presentation
+        window.onload = displaySlide;
+    </script>
+</body>
+</html>
